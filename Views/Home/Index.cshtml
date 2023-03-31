@@ -1,31 +1,104 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model ValueTuple<List<Sigma_Group_project.Models.User>, List<int>,string>
+@using Sigma_Group_project;
+@{
+    Layout = "//Views//MasterViewIndex.cshtml";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<div class="portfolios">
+    <div class="portfolios_title">Last Portfolios</div>
+    @if (Model.Item1.Count > 0)
+    {
+<div class="portfolios__row">
+    @for (int i=0;i<Model.Item1.Count;i++)
+    {
+        var user = Model.Item1[i];
+        var userProjects = user.Projects;
+        var sortedUserProjects = Sorting.Selected_sort(userProjects, Math.Min(userProjects.Count, 3));
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        <a class="user_page" href="@Url.Action("UserPage", "Home", new { userId = user.Id })">
+            <div class="portfolios__item item">
+                <div class="item__row">
+                    <div class="item__title">
+                        <img src="@user.AvatarUrl" alt="" class="title__image">
+                        <div class="item__info">
+                            <p class="title_name">@user.Name</p>
+                            <p class="title_main_skill">@user.Position</p>
+                        </div>
+                        <div class="item__skills">
+
+
+                            @foreach (var project in sortedUserProjects)
+                            {
+                                <div class="item__skill skill">
+                                    <div class="skill__info">@project.Title</div>
+                                    @if (project.Technology != "")
+                                    {
+                                        <div class="skill__name"><p>@project.Technology.Split(',')[0]</p></div>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    }
+    @if (Model.Item1.Count % 3 == 2)
+    {
+        <a class="user_page" hidden>
+
+        </a>
+    }
+</div>
+    }
+    else
+    {
+        <div>
+            <img src="~/Content/img/searcherror.jpg" alt="" class="error_image">
+        </div>
+        <div>
+            <p class="error_text">What a crap! Nothing was found :(</p>
+        </div>
+    }
+</div>
+<div class="page_turner">
+    <div class="page_turner__row pages">
+        <div class="pages__arrow_left"></div>
+        <div class="pages__values">
+            @if (Model.Item2.Count > 1)
+            {
+                int current_page = Model.Item2.Last();
+                Model.Item2.RemoveAt(Model.Item2.Count - 1);
+                if (current_page > 1)
+                {
+                    <a href="@Url.Action("index", "Home", new { order = @Model.Item3,page = current_page - 1 })" class="previous_page"></a>
+                }
+                <div class="pages_list">
+                    @foreach (int page in Model.Item2)
+                    {
+                        if (page != current_page && page > 0)
+                        {
+                            <a href="@Url.Action("Index", "Home", new { order = @Model.Item3, page = page })" class="page_value">@page</a>
+                        }
+                        else if (page == 0)
+                        {
+                            <span class="page_value">...</span>
+                        }
+                        else if (page == Model.Item2.Max())
+                        {
+                            <a href="@Url.Action("Index", "Home", new { order = @Model.Item3, page = page })" class="current_last_page_value">@page</a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Index", "Home", new { order = @Model.Item3, page = page })" class="current_page_value">@page</a>
+                        }
+                    }
+                </div>
+                if (current_page < Model.Item2.Max())
+                {
+                    <a href="@Url.Action("Index", "Home", new { order = @Model.Item3, page = current_page + 1 })" class="next_page"></a>
+                }
+            }
+        </div>
     </div>
 </div>

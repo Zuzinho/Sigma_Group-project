@@ -121,20 +121,89 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="DataBase.cs" />
+    <Compile Include="Generator.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="LinksConverter.cs" />
+    <Compile Include="Mail.cs" />
+    <Compile Include="Models\Form.cs" />
+    <Compile Include="Models\Link.cs" />
+    <Compile Include="Models\Project.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Paginations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reference.cs" />
+    <Compile Include="Sorting.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="App_Data\SigmaDB.mdf" />
+    <Content Include="App_Data\SigmaDB_log.ldf">
+      <DependentUpon>SigmaDB.mdf</DependentUpon>
+    </Content>
+    <Content Include="Content\css\about.css" />
+    <Content Include="Content\css\add_project.css" />
+    <Content Include="Content\css\all_projects.css" />
+    <Content Include="Content\css\code_confirmation.css" />
+    <Content Include="Content\css\edit_user_page.css" />
+    <Content Include="Content\css\password_recover.css" />
+    <Content Include="Content\css\project_page.css" />
+    <Content Include="Content\css\sign_in.css" />
+    <Content Include="Content\css\sign_up.css" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\css\user_page.css" />
+    <Content Include="Content\html\about.html" />
+    <Content Include="Content\html\add_project.html" />
+    <Content Include="Content\html\all_projects.html" />
+    <Content Include="Content\html\edit_user_page.html" />
+    <Content Include="Content\html\index.html" />
+    <Content Include="Content\html\project_page.html" />
+    <Content Include="Content\html\sign_in.html" />
+    <Content Include="Content\html\sign_up.html" />
+    <Content Include="Content\html\user_page.html" />
+    <Content Include="Content\img\about1.jpg" />
+    <Content Include="Content\img\about2.jpg" />
+    <Content Include="Content\img\about3.jpg" />
+    <Content Include="Content\img\about4.png" />
+    <Content Include="Content\img\avatars\avatar0.jpg" />
+    <Content Include="Content\img\avatars\avatar1.jpg" />
+    <Content Include="Content\img\avatars\sql\CreateRoomContentsql.sql" />
+    <Content Include="Content\img\avatars\sql\CreateTypeMessage.sql" />
+    <Content Include="Content\img\avatars\sql\CreateTypeUser.sql" />
+    <Content Include="Content\img\avatars\sql\GetLastMessage.sql" />
+    <Content Include="Content\img\avatars\sql\SendMessage.sql" />
+    <Content Include="Content\img\icons\arrow-left.png" />
+    <Content Include="Content\img\icons\arrow-right.png" />
+    <Content Include="Content\img\icons\magnifying-glass.png" />
+    <Content Include="Content\img\icons\Plus.png" />
+    <Content Include="Content\img\icons\selectedStar.png" />
+    <Content Include="Content\img\icons\Star.png" />
+    <Content Include="Content\img\icons\Trash.png" />
+    <Content Include="Content\img\icons\UploadSimple.png" />
+    <Content Include="Content\img\links_icons\facebook.com.png" />
+    <Content Include="Content\img\links_icons\github.com.png" />
+    <Content Include="Content\img\links_icons\linkedin.com.png" />
+    <Content Include="Content\img\links_icons\telegram.org.png" />
+    <Content Include="Content\img\links_icons\twitter.com.png" />
+    <Content Include="Content\img\links_icons\vk.com.png" />
+    <Content Include="Content\img\links_icons\youtube.com.png" />
+    <Content Include="Content\img\Projects_avatars\avatar1.jpg" />
+    <Content Include="Content\img\Projects_avatars\avatar12.jpg" />
+    <Content Include="Content\img\Projects_avatars\avatar2.jpg" />
+    <Content Include="Content\img\searcherror.jpg" />
+    <Content Include="Content\img\title.jpg" />
+    <Content Include="Content\js\ChangeActive.js" />
+    <Content Include="Content\js\GetAvatar.js" />
+    <Content Include="Content\js\Links.js" />
+    <Content Include="Content\js\markdown.js" />
+    <Content Include="Content\js\searchProjects.js" />
+    <Content Include="Content\js\sendProjects.js" />
+    <Content Include="Content\sql\AddLink.sql" />
+    <Content Include="Content\sql\CreateTable.sql" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -159,23 +228,27 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\AboutPage.cshtml" />
+    <Content Include="Views\Home\AddProject.cshtml" />
+    <Content Include="Views\Home\AllProjects.cshtml" />
+    <Content Include="Views\Home\CodeConfirmation.cshtml" />
+    <Content Include="Views\Home\EditProjectPage.cshtml" />
+    <Content Include="Views\Home\EditUserPage.cshtml" />
+    <Content Include="Views\Home\PasswordRecover.cshtml" />
+    <Content Include="Views\Home\ProjectPage.cshtml" />
+    <Content Include="Views\Home\SignIn.cshtml" />
+    <Content Include="Views\Home\SignUp.cshtml" />
+    <Content Include="Views\Home\UserPage.cshtml" />
+    <Content Include="Views\MasterViewIndex.cshtml" />
+    <Content Include="Views\MasterViewUserPage.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
